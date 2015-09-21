@@ -21,5 +21,5 @@ function sum_recursive(m){
 	return m + sum_recursive(m-1);
 }
 
-
+FirstletterUppercase.slice(0,1).toUpperCase() + FirstletterUppercase.slice(1).toLowerCase();
 
