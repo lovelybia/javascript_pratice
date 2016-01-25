@@ -86,9 +86,17 @@
 		90 : "slow",
 		88 : "faster",
 		67 : "smaller",
-		86 : "bigger"
+		86 : "bigger",
+		49 : "1",
+		50 : "2",
+		51 : "3",
+		52 : "4",
+		53 : "5",
+		54 : "6",
+		55 : "7",
+		56 : "8",
+		57 : "9"
 	};
-
 	var getSpeed = function(current,  changed){
 		if(current == 0 )
 			return 0  ;
@@ -101,35 +109,32 @@
 
 	}
 
-
 	$("body").keydown(function (event) {
+		var action = keyActions[event.keyCode];
 		if(event.keyCode >= 49 && event.keyCode <= 57){
 			ball.speed = event.keyCode - 49 +1 ;
+			applySpeed();			
+		}
+		else if(action == "slow"){
+			ball.speed > 1
+			ball.speed--
 			applySpeed();
-			
-			var action = keyActions[event.keyCode];
-			if(action == "slow"){
-				ball.speed > 1
-				ball.speed--
+		}
+		else if(action == "faster"){
+				ball.speed++
 				applySpeed();
-				}
-			}else{
-				if(action == "faster"){
-					ball.speed++
-					applySpeed();
-				}
-			}else{
-				if(action == "smaller"){
-					ball.radius--;
-				}
-			}else{
-				if(action == "bigger"){
-					ball.radius++;
-				}
-			}else{
-				ball.setDirection(action);
-			}
-		);
+		}
+		else if(action == "smaller"){
+				ball.radius--;
+		}
+		else if(action == "bigger"){
+				ball.radius++;
+		}
+		else
+		{
+			ball.setDirection(action);
+		}
+	});
 
 	var applySpeed = function(){
 		ball.speeds.xSpeed = getSpeed(ball.speeds.xSpeed ,ball.speed);
