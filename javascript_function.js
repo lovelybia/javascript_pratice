@@ -23,3 +23,19 @@ function sum_recursive(m){
 
 FirstletterUppercase.slice(0,1).toUpperCase() + FirstletterUppercase.slice(1).toLowerCase();
 
+
+
+for( var index = 0; index < dinosaurs.length ; index++ ){ 
+	if( index%2 == 0){
+		console.log(dinosaurs[index]);
+	} 
+}
+
+
+var owedMoney = {};
+owedMoney["Jimmy"] = 5;
+owedMoney["Anna"] = 7;
+
+var animals = { 0:"Lion", 1:"Flamingo", 2:"Polar Bear", 3:"Boa Constrictor"};
+
+animals[0];
