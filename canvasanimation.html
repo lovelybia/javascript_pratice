@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Canvas Animation</title>
+</head>
+
+<body>
+
+<canvas id="canvas" width="400" height="400"></canvas>
+
+<script>
+
+var canvas = document.getElementById("canvas");
+var ctx = canvas.getContext("2d");
+var size = 0;
+
+
+
+var canvas = document.getElementsByTagName('canvas')[0];
+
+
+/*setInterval(function () {
+	ctx.clearRect(0, 0, 200, 200);
+	ctx.fillRect(0, 0, size, size);
+	size++;
+
+	if(size > 200) {
+		size= 0;
+	}
+ }, 
+ 30);*/
+</script>
+<script type="text/javascript">
+	var circle = function(x,y,radious,fillCircle){
+		ctx.beginPath();
+		ctx.arc(x,y,radious,0,Math.PI * 2, false);
+		if(fillCircle){
+			ctx.fill();
+		}else{
+			ctx.stroke();
+		}
+	};
+
+	var drawBee = function (x, y) {
+		ctx.lineWidth = 2;
+		ctx.strokeStyle = "Black";
+		ctx.fillStyle = "Gold";
+		circle(x, y, 8, true);
+		circle(x, y, 8, false);
+		circle(x - 5, y - 11, 5, false);
+		circle(x + 5, y - 11, 5, false);
+		circle(x - 2, y - 1, 2, false);
+		circle(x + 2, y - 1, 2, false);
+	};
+
+
+	var update = function (coordinate) {
+		var offset = Math.random() * 4 - 2;
+		coordinate += offset;
+		if (coordinate > width) {
+			coordinate = width;
+		}
+
+		if (coordinate < 0) {
+			coordinate = 0;
+		}
+		return coordinate;
+	};
+
+	var x = 100;
+	var y = 100;
+	/*
+	setInterval(function () {
+		ctx.clearRect(0, 0, 200, 200);
+		drawBee(x, y);
+		x = update(x);
+		y = update(y);
+		ctx.strokeRect(0, 0, 200, 200);
+	}, 
+	30);
+*/
+</script>
+<script type="text/javascript">
+	var colors = ["Red", "Orange", "Yellow", "Green", "Blue", " Purple"];
+
+	var ball = function(){
+		this.x = 100;
+		this.y = 100;
+		this.xSpeed = -2;
+		this.ySpeed = 3;
+		this.color = colors[Math.floor(Math.random()*6)];
+	};
+
+	var circle = function(x,y,radious,fillCircle,color){
+		ctx.beginPath();
+		ctx.arc(x,y,radious,0,Math.PI * 2, false);
+		if(fillCircle){
+			ctx.fillStyle = color;
+			ctx.fill();
+		}else{
+			ctx.stroke();
+		}
+	};
+
+	ball.prototype.draw = function(){
+		circle(this.x, this.y, 3, true, this.color);
+		return circle + Math.floor(Math.random(colors));
+	};
+
+	ball.prototype.move =function(){
+		this.x += this.xSpeed
+		this.y += this.ySpeed;
+		this.xSpeed = Math.random()* 10 - 5;
+		this.ySpeed = Math.random()* 10 -5;
+		console.log(this.xSpeed + ", " + this.ySpeed);
+	};
+
+	ball.prototype.checkCollision = function(){
+		if(this.x < 0 || this.x > width){
+			this.xSpeed = -this.xSpeed;
+		}
+		if(this.y < 0 || this.y > height){
+			this.ySpeed = -this.ySpeed;
+		}
+	};
+	
+	var canvas = document.getElementById("canvas");
+	var ctx = canvas.getContext("2d");
+	
+	var balls = [];
+	for(var index= 0  ; index < 10;  index++ ){
+		balls.push(new ball());
+	}
+	setInterval(function(){
+		ctx.clearRect(0,0,width,height);
+
+		for(var index = 0; index < balls.length ; index++){
+				balls[index].draw();
+				balls[index].move();
+				balls[index].checkCollision();
+			}
+			ctx.strokeRect(0,0,width,height);
+
+		},60);
+
+		var width = canvas.width;
+		var height = canvas.height;
+		
+		canvas.width = 500
+		canvas.height = 500;
+</script>
+
+</body>
+</html>

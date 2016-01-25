@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Keyboard input</title>
+</head>
+<body>
+<canvas id="canvas" width="400" height="400"></canvas>
+
+<script src="https://code.jquery.com/jquery-2.1.0.js"></script>
+<script type="text/javascript">
+	var canvas = document.getElementById("canvas");
+	var ctx = canvas.getContext("2d");
+	var width = canvas.width;
+	var height = canvas.height;
+
+	var circle = function(x,y,radius,fillCircle){
+		ctx.beginPath();
+		ctx.arc(x,y,radius,0, Math.PI * 2, false);
+		if( fillCircle ){
+			ctx.fill();
+		}else{
+			ctx.stroke();
+		}
+	};
+
+	var Ball = function(){
+		this.x = width/ 2;
+		this.y = height / 2;
+		this.speeds = { xSpeed: 5, ySpeed: 0 };
+		this.xSpeed = this.speed;
+		this.ySpeed = 0;
+		this.speed = 5;
+		this.radius = 10 ;
+	};
+
+	Ball.prototype.move = function(){
+		this.x += this.speeds.xSpeed;
+		this.y += this.speeds.ySpeed;
+
+		if(this.x < 0 ){
+			this.speeds.xSpeed = -this.speeds.xSpeed;
+		}else if(this.x > width){
+			this.speeds.xSpeed = -this.speeds.xSpeed;
+		}else if(this.y < 0){
+			this.speeds.ySpeed = -this.speeds.ySpeed;
+		}else if(this.y > height){
+			this.speeds.ySpeed = -this.speeds.ySpeed;
+		}
+	};
+
+	Ball.prototype.draw = function(){
+		circle(this.x, this.y, this.radius, true);
+	};
+
+	var ball = new Ball();
+	ball.move();
+	ball.move();
+	ball.move();
+	ball.draw();
+
+	Ball.prototype.setDirection = function(direction){
+		if(direction === "up"){
+			this.speeds.xSpeed = 0;
+			this.speeds.ySpeed = -this.speed;
+		}else if(direction === "down"){
+			this.speeds.xSpeed = 0;
+			this.speeds.ySpeed = this.speed;
+		}else if(direction === "left"){
+			this.speeds.xSpeed = -this.speed;
+			this.speeds.ySpeed = 0;
+		}else if(direction === "right"){
+			this.speeds.xSpeed = this.speed;
+			this.speeds.ySpeed = 0;
+		}else if(direction === "stop"){
+			this.speeds.xSpeed = 0;
+			this.speeds.ySpeed = 0;
+		}
+	};
+
+	var keyActions = {
+		32 : "stop",
+		37 : "left",
+		38 : "up",
+		39 : "right",
+		40 : "down",
+		90 : "slow",
+		88 : "faster",
+		67 : "smaller",
+		86 : "bigger"
+	};
+
+	var getSpeed = function(current,  changed){
+		if(current == 0 )
+			return 0  ;
+
+		if(current > 0 )
+			return changed;
+
+		if(current < 0 )
+			return -changed;
+
+	}
+
+
+	$("body").keydown(function (event) {
+		if(event.keyCode >= 49 && event.keyCode <= 57){
+			ball.speed = event.keyCode - 49 +1 ;
+			applySpeed();
+			
+			var action = keyActions[event.keyCode];
+			if(action == "slow"){
+				ball.speed > 1
+				ball.speed--
+				applySpeed();
+				}
+			}else{
+				if(action == "faster"){
+					ball.speed++
+					applySpeed();
+				}
+			}else{
+				if(action == "smaller"){
+					ball.radius--;
+				}
+			}else{
+				if(action == "bigger"){
+					ball.radius++;
+				}
+			}else{
+				ball.setDirection(action);
+			}
+		);
+
+	var applySpeed = function(){
+		ball.speeds.xSpeed = getSpeed(ball.speeds.xSpeed ,ball.speed);
+		ball.speeds.ySpeed = getSpeed(ball.speeds.ySpeed, ball.speed);
+		console.log("speed: " + ball.speed);						
+	}
+
+	setInterval(function () {
+		ctx.clearRect(0, 0, width, height);
+		ball.draw();
+		ball.move();
+		//console.log(ball.x + ',' + ball.y);
+		ctx.strokeRect(0, 0, width, height);
+	}, 30);		
+
+</script>
+
+</body>
+</html>
