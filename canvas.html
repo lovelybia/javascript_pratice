@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Canvas</title>
+</head>
+<body>
+<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.js"></script>
+<canvas id = "canvas" width = "2000" height = "2000"></canvas>
+<script type="text/javascript">
+	var canvas = document.getElementById("canvas");
+	var ctx = canvas.getContext("2d");
+
+	ctx.fillStyle = "Red";
+	ctx.fillRect(0, 0, 50,100);
+
+	ctx.fillStyle = "Blue";
+	ctx.fillRect(50,0,50,100);
+
+	ctx.fillStyle = "Green";
+	ctx.fillRect(100,0,50,100);
+
+	ctx.strokeStyle = "Gray";
+	ctx.strokeRect(150,0,100,50);
+
+	ctx.strokeStyle = "Black";
+	ctx.strokeRect(150, 50, 100, 50);
+
+	ctx.strokeStyle = "Turquoise";
+	ctx.lineWidth = 4;
+	ctx.beginPath();
+	ctx.moveTo(250,0);
+	ctx.lineTo(350,100);
+	ctx.moveTo(350,0);
+	ctx.lineTo(250,100);
+	ctx.stroke();
+
+	ctx.fillStyle = "SkyBlue";
+	ctx.beginPath();
+	ctx.lineTo(400,0);
+	ctx.lineTo(350,50);
+	ctx.lineTo(350,100);
+	ctx.lineTo(450,100);
+	ctx.lineTo(450,50);
+	ctx.lineTo(400,0);
+	ctx.fill();
+
+</script>
+<script type="text/javascript">
+	var circle = function(x,y,radious){
+		ctx.beginPath();
+		ctx.arc(x,y,radious,0,Math.PI * 2, false);
+		ctx.stroke();
+	}
+	ctx.lineWidth = 4;
+	ctx.strokeStyle = "Red";
+	circle(100,200,10);
+	ctx.strokeStyle = "Orange";
+	circle(100,200,20);
+	ctx.strokeStyle = "Yellow";
+	circle(100,200,30);
+	ctx.strokeStyle = "Green";
+	circle(100,200,40);
+	ctx.strokeStyle = "Blue";
+	circle(100,200,50);
+	ctx.strokeStyle = "Purple";
+	circle(100,200,60);
+</script>
+<script type="text/javascript">
+	var circle = function(x,y,radious){
+		ctx.beginPath();
+		ctx.arc(x,y,radious,0,Math.PI * 2, false);
+		ctx.stroke();
+	}
+	var fillcircle = function(x,y,radious){
+		ctx.beginPath();
+		ctx.arc(x,y,radious,0,Math.PI * 2, false);
+		ctx.fill();
+	}
+	
+	var	drawPoints = function(points)
+		for(var index = 0; index < points.length - 1; index++;){
+			ctx.beginPath();
+			ctx.strokeStyle = "Blue";
+			ctx.moveTo(points[index][0], points[index][1]);
+			ctx.lineTo(points[index+1][0], points[index+1][0]);
+			ctx.stroke();
+		}
+
+	var points = [[450,450], [450, 200], [200,200], [200,450],[50,450]];
+	drawPoints(points);
+	
+	var mysterypoints = [[450,450], [450,200], [125,220],[200,450],[170,190],[200,190],[70,220]];
+	drawPoints(mysterypoints);
+	
+	ctx.lineWidth = 4;
+	ctx.strokeStyle = "Black";
+	circle(200,200,40);
+	ctx.strokeStyle = "Black";
+	circle(200,300,60);
+
+	ctx.lineWidth = 2;
+	ctx.strokeStyle = "Blue";
+	fillcircle(185,195,7);
+	ctx.strokeStyle = "Blue";
+	fillcircle(215,195,7);
+
+	ctx.lineWidth = 2;
+	ctx.strokeStyle = "Orange";
+	fillcircle(200, 210,9);
+
+	ctx.lineWidth = 3;
+	ctx.strokeStyle = "Brown";
+	fillcircle(200, 260, 10);
+	ctx.strokeStyle = "Turquoise";
+	fillcircle(200,300,10);
+	ctx.strokeStyle = "Brown";
+	fillcircle(200, 340,10);
+</script>
+<script type="text/javascript">
+	$("body").mousemove(function(event){
+		ctx.lineWidth = 1;
+		ctx.strokeStyle = "Black";
+		circle(event.pageX,event.pageY,3);		
+
+	})
+</script>
+<script type="text/javascript">
+	ctx.beginPath;
+	ctx.stroke;
+	ctx.lineWidth = "4";
+	ctx.strokeStyle = "Black";
+	ctx.moveTo(250, 100);
+	ctx.lineTo(250,150);
+	ctx.moveTo(350, 150);
+	ctx.lineTo(350, 100);
+	ctx.moveTo(250,100);
+	
+</script>
+</body>
+</html>

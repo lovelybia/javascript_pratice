@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Interactive Programming</title>
+</head>
+<body>
+<h1 id = "heading">Hello World!</h1>
+<script src = "https://code.jquery.com/jquery-2.1.0.js"></script>
+<script>
+	/*var leftOffset = 0;
+	var moveheading = function(){
+		$("#heading").offset({left : leftOffset});
+		leftOffset=leftOffset+4;
+		if(leftOffset > 200){
+			leftOffset = 0;
+		}
+	}
+	//setInterval(moveheading, 30);*/
+</script>
+<script>
+/*
+	var clickHandler = function(event){
+		console.log("Click!" + event.pageX + " " + event.pageY);
+
+	};
+	$("h1").click(clickHandler);
+	*/
+</script>
+<script>
+/*
+	$("html").click(function(event){
+		$("#heading").offset({
+			left : event.pageX,
+			top : event.pageY
+		});
+	});
+/*$("html").mousemove(function(event){
+	$("#heading").offset({
+		left : event.pageX,
+		top: event.pageY
+			
+
+	});
+});*/	
+</script>
+<script>
+
+	var leftOffset = 0;
+	var topOffset = 0;
+	var direction = 0 ;
+	var clickCount = 0;
+	var animationInterval = 1024; 
+
+	var movingHeading= function(){
+		if(leftOffset == 0  && topOffset == 0 ){
+			direction = 0;
+		}
+		else
+		if(leftOffset == 200 && topOffset == 0){
+			direction =1 ;
+		}
+		else
+		if(leftOffset == 200 && topOffset == 200){
+			direction = 2;
+		}
+		else
+			if(leftOffset == 0 && topOffset == 200)
+		{
+			direction = 3 ;
+		}
+
+		if(direction == 0 ){
+			leftOffset++;
+		}
+		else
+		if(direction == 1){
+			topOffset++;
+		}
+		else
+		if(direction==2){
+			leftOffset--;
+		}
+		else
+			if(direction==3)
+		{
+			topOffset--;
+		}
+
+		$("#heading").offset({left : leftOffset,  top : topOffset});
+		console.log("x: " + leftOffset, ", y: " + topOffset);
+	}
+
+	$('#heading').click(function(event){
+		clearInterval(timerId);
+
+		if(clickCount == 10 ){	
+			$('#heading').text("You win!!");
+			clickCount = 0 ;
+			return;
+		}
+
+		clickCount++;
+		$('#heading').text("You clicked " + clickCount + " times");
+		animationInterval = animationInterval/2;
+		console.log("animation interval: " + animationInterval);
+		timerId = setInterval(movingHeading, animationInterval);
+
+	});
+
+	var timerId = setInterval(movingHeading,animationInterval);
+	/*
+	$("html").click(function(event){
+		if(timerId != 0 ){
+			clearInterval(timerId);
+			timerId = 0 ; 
+		}
+		else{
+			timerId = setInterval(movingHeading,animationInterval);
+		}
+	})*/
+		
+</script>
+</body>
+</html>
+
