@@ -43,6 +43,15 @@
 
 	drawBoarder();
 	drawScore();
+
+	var gameOver = function(){
+		clearInterval(IntervalId);
+		ctx.font = "60px Countier";
+		ctx.fillStyle = "Black";
+		ctx.textAlign = "center";
+		ctx.textBaseline = "middle";
+		ctx.fillText("Game Over", width / 2, height / 2);
+	};
 </script>
 </body>
 </html>
