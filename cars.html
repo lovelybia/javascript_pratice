@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Cars!</title>
+</head>
+<body>
+<script src = "https://code.jquery.com/jquery-2.1.0.js"></script>
+<script type="text/javascript">
+	
+	var Car = function(x,y){
+		var self = this;
+		this.x = x;
+		this.y = y;
+
+		self.speed = 200;
+
+		self.draw = function(){
+			var carHtml = '<img src = "http://nostarch.com/images/car.png" class="car">';
+			
+			this.carElement = $(carHtml);
+
+			this.carElement.css({
+				position : "absolute",
+				left : this.x,
+				top : this.y
+			});
+			$("body").append(this.carElement);
+		} 
+
+		self.draw();
+
+	}; 
+
+	Car.prototype.moveRight = function(speed) {
+		this.x += speed;
+
+		this.carElement.css({
+			left : this.x,
+			top : this.y
+		});
+	};
+
+	Car.prototype.moveLeft =function(speed) {
+		this.x -= speed;
+		this.carElement.css({
+			left : this.x,
+			top : this.y
+		});
+	};
+
+	Car.prototype.moveUp = function(speed) {
+		this.y += speed;
+		this.carElement.css({
+			left : this.x,
+			top : this.y
+		});
+	};
+
+	Car.prototype.moveDown = function(speed) {
+		this.y -= speed;
+		this.carElement.css({
+			left : this.x,
+			top : this.y
+		});
+	};
+	var tesla = new Car(20,20);
+	var nissan = new Car(150,260);
+	var audi = new Car(50, 100);
+	var benz = new Car(100, 180);
+	var bently = new Car(200, 340);
+
+
+	setInterval(function(){
+		var speed = Math.floor(Math.random() * 5 + 1);
+		console.log(speed);
+		tesla.moveRight(speed);
+	},30);
+
+
+</script></body>
+</html>

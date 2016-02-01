@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+	<html>
+	<head></head>
+	<title></title> 
+	<body class='body'>
+		<h1 id="main-heading">Hello world!</h1>
+		<script src="https://code.jquery.com/jquery-2.1.4.js"></script>
+		<script>
+		// var newHeadingText = prompt("Please enter new heading text");
+		// $("#main-heading").text(newHeadingText);
+		$("body").append("<p>this is new paragraph</p>");
+		$("body").prepend("<p> Paragraph</p>");
+		$("h1").fadeOut(5000).fadeIn(5000);
+		//$("h1").slideUp(5000);
+		$("h1").slideDown(5000);
+		$("#main-heading").text("My Friends");
+		var BiaFriends = ["Yenna", "Tammy", "Ashley","Julie"];
+		for(var index = 0 ;  index < BiaFriends.length ; index++ ){
+			$("body").append("<p id='" + index + "''>" + BiaFriends[index] + "</p>");
+			$('#' + index.toString()).hide(5000).fadeIn(5000);
+		}
+		/*
+		for(var index = 0; index < 3; index++){
+			var fadeValue = 1000*(index+1);
+			$("#main-heading").fadeOut(fadeValue).delay(5000).fadeIn(fadeValue);
+		}*/
+		$("h1").fadeTo(2000, 0.5);
+		</script>
+	</body>
+
+	</html>
+ 
+
+ var counter = 5;
+ var printMessage = function() {
+ 	console.log("You have been staring at your console for" + counter + "seconds");
+ 	counter=counter+5;
+ };
+
+ var intervalId = setInterval(printMessage, 5000);
